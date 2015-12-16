@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Searches CHEATSHEET_DIR for the given subject and prints it.
+#
+# Set the CHEATSHEET_DIR variable in your bash_profile like this:
+#
+#     export CHEATSHEET_DIR=/Users/user/cheatsheets/
+
+# TODO Make sure the CHEATSHEET_DIR variable is set.
+
+# Make sure a subject is given.
+if ! [ $1 ] ; then
+  echo "Usage: 'cheat subject' or 'cheat -l'"
+  exit 1
+fi
+
+if [ $1 = "-l" ] ; then
+  echo -e $(ls -1 ${CHEATSHEET_DIR})
+  exit 0
+fi
+
+# TODO: Check whether CHEATSHEET_DIR ends with a '/' and add one if not.
+subject=$1
+filename="${CHEATSHEET_DIR}${subject}.txt"
+
+if [ -f "$filename" ] ; then
+  cat "$filename"
+else
+  echo "No cheatsheet installed for $subject"
+fi
